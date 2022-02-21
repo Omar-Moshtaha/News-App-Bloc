@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/business_screen/business_screen.dart';
 import 'package:news/modules/science_screen/science_screen.dart';
 import 'package:news/modules/sports_screen/sports_screen.dart';
+import 'package:news/shared/components/constant.dart';
 import 'package:news/shared/cubit/states.dart';
 import 'package:news/shared/network/local/cacth_helper.dart';
 import 'package:news/shared/network/remote/dio_helper.dart';
@@ -32,10 +33,10 @@ class AppCubit extends Cubit<AppStates> {
   // String country = "eg";
   List<dynamic?> business = [];
 
-  void get_business() {
+  void get_business(lang) {
     emit(Business_Load());
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
-      'country': 'eg',
+      'country': '$lang',
       'category': 'business',
       'apiKey': '65702bc37dd441b797629b8f9b7a044b'
     }).then((value) {
@@ -49,10 +50,10 @@ class AppCubit extends Cubit<AppStates> {
 
   List<dynamic?> sports = [];
 
-  void get_sports() {
+  void get_sports(lang) {
     emit(Sports_Load());
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
-      'country': 'eg',
+      'country': '$lang',
       'category': 'sports',
       'apiKey': '65702bc37dd441b797629b8f9b7a044b'
     }).then((value) {
@@ -66,10 +67,10 @@ class AppCubit extends Cubit<AppStates> {
 
   List<dynamic?> science = [];
 
-  void get_science() {
+  void get_science(lang) {
     emit(Science_Load());
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
-      'country': 'eg',
+      'country': '$lang',
       'category': 'science',
       'apiKey': '65702bc37dd441b797629b8f9b7a044b'
     }).then((value) {
@@ -80,11 +81,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(Science_Fail(error.toString()));
     });
   }
-  //
-  // void change(String value) {
-  //   country = value;
-  //   emit(Country());
-  // }
+
 
   bool isDark = false;
 

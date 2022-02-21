@@ -15,6 +15,20 @@ class HomeScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text("News App"),
             actions: [
+              IconButton(onPressed: () {
+                AppCubit.get(context).get_business("us");
+                AppCubit.get(context).get_sports("us");
+                AppCubit.get(context).get_science("us");
+
+
+              }, icon: Icon(Icons.add)),
+              IconButton(onPressed: () {
+                AppCubit.get(context).get_business("cn");
+                AppCubit.get(context).get_sports("cn");
+                AppCubit.get(context).get_science("cn");
+
+
+              }, icon: Icon(Icons.add)),
               IconButton(
                   onPressed: () {
                     Navigator.push(

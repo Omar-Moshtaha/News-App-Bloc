@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AppCubit()
-        ..get_business()
-        ..get_sports()
-        ..get_science()
+        ..get_business("eg")
+        ..get_sports("eg")
+        ..get_science("eg")
         ..change_theme(value: isDark),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
