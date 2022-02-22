@@ -38,7 +38,7 @@ Widget build_item(busines, context) => Padding(
                       child: Text(
                     "${busines["title"]}",
                     style: Theme.of(context).textTheme.body1,
-                    maxLines: 4,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   )),
                   Text(

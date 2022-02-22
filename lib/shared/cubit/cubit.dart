@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/business_screen/business_screen.dart';
 import 'package:news/modules/science_screen/science_screen.dart';
+import 'package:news/modules/search_screen/search_screen.dart';
 import 'package:news/modules/sports_screen/sports_screen.dart';
 import 'package:news/shared/components/constant.dart';
 import 'package:news/shared/cubit/states.dart';
@@ -13,11 +14,12 @@ class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(InitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
-  int index = 2;
+  int index = 0;
   List<BottomNavigationBarItem> bottom = [
     BottomNavigationBarItem(icon: Icon(Icons.business), label: "Business"),
     BottomNavigationBarItem(icon: Icon(Icons.sports), label: "Sports"),
     BottomNavigationBarItem(icon: Icon(Icons.science), label: "Science"),
+    BottomNavigationBarItem(icon: Icon(Icons.search),label: "Search"),
   ];
 
   void bottom_index(value) {
@@ -29,6 +31,7 @@ class AppCubit extends Cubit<AppStates> {
     Business_Screen(),
     Sports_Screen(),
     Science_Screen(),
+    Search_Screen(),
   ];
   // String country = "eg";
   List<dynamic?> business = [];
@@ -38,7 +41,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'business',
-      'apiKey': '65702bc37dd441b797629b8f9b7a044b'
+      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
     }).then((value) {
       business = value!.data["articles"];
       emit(Business_Succeeded());
@@ -55,7 +58,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'sports',
-      'apiKey': '65702bc37dd441b797629b8f9b7a044b'
+      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
     }).then((value) {
       sports = value!.data["articles"];
       emit(Sports_Succeeded());
@@ -72,7 +75,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'science',
-      'apiKey': '65702bc37dd441b797629b8f9b7a044b'
+      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
     }).then((value) {
       science = value!.data["articles"];
       emit(Science_Succeeded());
@@ -103,7 +106,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(Search_Load());
     Dio_Helpers.getdata(mothed: 'v2/everything', qeruy: {
       'q': '$value',
-      'apiKey': '65702bc37dd441b797629b8f9b7a044b'
+      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
     }).then((value) {
       search = value!.data["articles"];
       emit(Search_Succeeded());
