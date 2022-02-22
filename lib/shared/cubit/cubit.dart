@@ -41,7 +41,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'business',
-      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
+      'apiKey': '643e6cf38c8f4d28ad36204d47f527f4'
     }).then((value) {
       business = value!.data["articles"];
       emit(Business_Succeeded());
@@ -58,7 +58,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'sports',
-      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
+      'apiKey': '643e6cf38c8f4d28ad36204d47f527f4'
     }).then((value) {
       sports = value!.data["articles"];
       emit(Sports_Succeeded());
@@ -75,7 +75,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'science',
-      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
+      'apiKey': '643e6cf38c8f4d28ad36204d47f527f4'
     }).then((value) {
       science = value!.data["articles"];
       emit(Science_Succeeded());
@@ -106,7 +106,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(Search_Load());
     Dio_Helpers.getdata(mothed: 'v2/everything', qeruy: {
       'q': '$value',
-      'apiKey': '82cbd3c0a34b4bbcb756c1eaf4a5d521'
+      'apiKey': '643e6cf38c8f4d28ad36204d47f527f4'
     }).then((value) {
       search = value!.data["articles"];
       emit(Search_Succeeded());

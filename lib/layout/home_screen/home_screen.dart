@@ -78,49 +78,68 @@ children: [
   SizedBox(width:15),
   Text("${item.image}"),
 Spacer(),
-IconButton(onPressed: () {
+IconButton(padding: EdgeInsets.zero,onPressed: () {
   if(item.id==1){
   AppCubit.get(context).get_business('us');
   AppCubit.get(context).get_sports('us');
   AppCubit.get(context).get_science('us');
+  Navigator.pop(context);
 
   }else if(item.id==2){
   AppCubit.get(context).get_business('au');
   AppCubit.get(context).get_sports('au');
   AppCubit.get(context).get_science('au');
+  Navigator.pop(context);
+
   }else if(item.id==3){
   AppCubit.get(context).get_business('ar');
   AppCubit.get(context).get_sports('ar');
   AppCubit.get(context).get_science('ar');
+  Navigator.pop(context);
+
   }else if(item.id==4){
     AppCubit.get(context).get_business('cn');
     AppCubit.get(context).get_sports('cn');
     AppCubit.get(context).get_science('cn');
+    Navigator.pop(context);
+
   }else if(item.id==5){
     AppCubit.get(context).get_business('ae');
     AppCubit.get(context).get_sports('ae');
     AppCubit.get(context).get_science('ae');
+    Navigator.pop(context);
+
   }else if(item.id==6){
     AppCubit.get(context).get_business('tr');
     AppCubit.get(context).get_sports('tr');
     AppCubit.get(context).get_science('tr');
+    Navigator.pop(context);
+
   }else if(item.id==7){
     AppCubit.get(context).get_business('ch');
     AppCubit.get(context).get_sports('ch');
     AppCubit.get(context).get_science('ch');
+    Navigator.pop(context);
+
   }
   else if(item.id==8){
     AppCubit.get(context).get_business('kr');
     AppCubit.get(context).get_sports('kr');
     AppCubit.get(context).get_science('kr');
+    Navigator.pop(context);
+
   }else if(item.id==9){
     AppCubit.get(context).get_business('mx');
     AppCubit.get(context).get_sports('mx');
     AppCubit.get(context).get_science('mx');
+    Navigator.pop(context);
+
   }else if(item.id==10){
     AppCubit.get(context).get_business('fr');
     AppCubit.get(context).get_sports('fr');
     AppCubit.get(context).get_science('fr');
+    Navigator.pop(context);
+
   }
 }, icon: Icon(Icons.arrow_forward_ios))
 ],
