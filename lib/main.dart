@@ -14,22 +14,27 @@ void main() async {
   Dio_Helpers.inti();
   await Cacth_Helper.inti();
   bool? isDark = Cacth_Helper.getBoolean('isDark');
-  runApp(MyApp(isDark));
+ String? value=Cacth_Helper.getLang('lang');
+if(value==null){
+  value='eg';
+}
+ print(value);
+  runApp(MyApp(isDark,value));
 }
 
 class MyApp extends StatelessWidget {
   bool? isDark;
-
-  MyApp(this.isDark);
+String?value;
+  MyApp(this.isDark,this.value);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AppCubit()
-        ..get_business("eg")
-        ..get_sports("eg")
-        ..get_science("eg")
-        ..change_theme(value: isDark),
+        ..get_business(value)
+        ..get_sports(value)
+        ..get_science(value)
+        ..change_theme(value: isDark)..change_lang(value),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
