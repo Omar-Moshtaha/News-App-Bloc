@@ -14,6 +14,13 @@ class Cacth_Helper {
   static bool? getBoolean(String key) {
     return sharedPreferences.getBool(key);
   }
+  static Future<bool> put_Dirctionlty(String key, bool value) async {
+    return sharedPreferences.setBool(key, value);
+  }
+
+  static bool? get_Dirctionlty(String key) {
+    return sharedPreferences.getBool(key);
+  }
   static Future<bool> putLang(String key, String value) async {
     return sharedPreferences.setString(key, value);
   }

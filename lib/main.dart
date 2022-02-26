@@ -15,17 +15,23 @@ void main() async {
   await Cacth_Helper.inti();
   bool? isDark = Cacth_Helper.getBoolean('isDark');
  String? value=Cacth_Helper.getLang('lang');
+ bool?Dirctionlty=Cacth_Helper.get_Dirctionlty('Dirctionlty');
+ if(Dirctionlty==null){
+   Dirctionlty=false;
+ }
 if(value==null){
   value='eg';
 }
  print(value);
-  runApp(MyApp(isDark,value));
+  runApp(MyApp(isDark,value,Dirctionlty));
 }
 
 class MyApp extends StatelessWidget {
   bool? isDark;
 String?value;
-  MyApp(this.isDark,this.value);
+  bool? Dirctionlty;
+
+  MyApp(this.isDark,this.value,this.Dirctionlty);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ String?value;
         ..get_business(value)
         ..get_sports(value)
         ..get_science(value)
-        ..change_theme(value: isDark)..change_lang(value),
+        ..change_theme(value: isDark)..change_lang(value)..Dirctionlty(Dirctionlty!),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
