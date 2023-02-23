@@ -1,3 +1,5 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +13,7 @@ import 'package:news/shared/network/remote/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   Dio_Helpers.inti();
   await Cacth_Helper.inti();
   bool? isDark = Cacth_Helper.getBoolean('isDark');
@@ -23,16 +26,15 @@ if(value==null){
   value='eg';
 }
  print(value);
-  runApp(MyApp(isDark,value,Dirctionlty));
+  runApp( DevicePreview(
+    builder: (context) => MyApp(isDark,value,Dirctionlty), // Wrap your app
+  ),);
 }
-
 class MyApp extends StatelessWidget {
   bool? isDark;
 String?value;
   bool? Dirctionlty;
-
   MyApp(this.isDark,this.value,this.Dirctionlty);
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -49,7 +51,7 @@ String?value;
             theme: ThemeData(
               scaffoldBackgroundColor: Colors.white,
               textTheme: TextTheme(
-                  body1: TextStyle(
+                  bodyText1: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
@@ -81,11 +83,10 @@ String?value;
             darkTheme: ThemeData(
               scaffoldBackgroundColor: HexColor("333739"),
               textTheme: TextTheme(
-                  body1: TextStyle(
+                  bodyText1: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.white)),
-
               appBarTheme: AppBarTheme(
                   backwardsCompatibility: false,
                   titleSpacing: 20,
@@ -112,7 +113,23 @@ String?value;
             ),
             themeMode:
                 AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
-            home: HomeScreen(),
+            home:
+            AnimatedSplashScreen(splashIconSize: double.infinity,splash:
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    Image(image: AssetImage("assets/image/newspaper.png"),height: 100,),
+
+    Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Text("News App"),
+    )
+  ],
+)
+             , nextScreen: HomeScreen(),
+splashTransition: SplashTransition.sizeTransition,
+
+            ),
           );
         },
       ),

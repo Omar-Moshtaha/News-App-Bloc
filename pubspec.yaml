@@ -32,8 +32,11 @@ dependencies:
   bloc: ^8.0.2
   dio: ^4.0.0
 #  http: ^0.12.2
-
+  animated_splash_screen: ^1.2.0
   conditional_builder: ^1.0.2
+  firebase_core:
+  device_preview: ^1.1.0
+
   hexcolor: ^2.0.3
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.0
@@ -61,8 +64,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - assets/image/newspaper.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

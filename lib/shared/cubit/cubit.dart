@@ -1,11 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/business_screen/business_screen.dart';
 import 'package:news/modules/science_screen/science_screen.dart';
 import 'package:news/modules/search_screen/search_screen.dart';
 import 'package:news/modules/sports_screen/sports_screen.dart';
-import 'package:news/shared/components/constant.dart';
 import 'package:news/shared/cubit/states.dart';
 import 'package:news/shared/network/local/cacth_helper.dart';
 import 'package:news/shared/network/remote/dio_helper.dart';
