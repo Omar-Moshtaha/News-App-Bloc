@@ -35,7 +35,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'business',
-      'apiKey': '9fd3d2271e764d2085b5b510e1ca9e0b'
+      'apiKey': '3ea4f12fea454b25a27b5e76d7054451'
     }).then((value) {
       business = value!.data["articles"];
       emit(Business_Succeeded());
@@ -50,7 +50,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'sports',
-      'apiKey': '9fd3d2271e764d2085b5b510e1ca9e0b'
+      'apiKey': '3ea4f12fea454b25a27b5e76d7054451'
     }).then((value) {
       sports = value!.data["articles"];
       emit(Sports_Succeeded());
@@ -65,7 +65,7 @@ class AppCubit extends Cubit<AppStates> {
     Dio_Helpers.getdata(mothed: 'v2/top-headlines', qeruy: {
       'country': '$lang',
       'category': 'science',
-      'apiKey': '9fd3d2271e764d2085b5b510e1ca9e0b'
+      'apiKey': '3ea4f12fea454b25a27b5e76d7054451'
     }).then((value) {
       science = value!.data["articles"];
       emit(Science_Succeeded());
@@ -78,15 +78,14 @@ class AppCubit extends Cubit<AppStates> {
   void change_theme({bool? value}) {
     if (value != null) {
       isDark = value;
-      emit(Change_Theme());
     } else {
       isDark = !isDark;
       Cacth_Helper.putBoolean('isDark', isDark).then((value) {
-        emit(Change_Theme());
       });
     }
+    emit(Change_Theme());
   }
-  List<dynamic?> search = [];
+  List<dynamic> search = [];
   void get_search(String value) {
     emit(Search_Load());
     Dio_Helpers.getdata(mothed: 'v2/everything', qeruy: {

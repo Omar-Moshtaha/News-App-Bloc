@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/modules/web_veiw/web_veiw.dart';
+import 'package:news/shared/cubit/cubit.dart';
 
 Widget build_item(busines, context) => Padding(
       padding:  EdgeInsets.only(left: 10.w,right: 10.w,top: 10.h ),
@@ -47,7 +48,7 @@ clipBehavior: Clip.antiAlias,
                     Text(
                       "${busines["title"]}",
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: AppCubit.get(context).isDark?Colors.white:Colors.black,
                       ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,

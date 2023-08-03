@@ -51,7 +51,9 @@ String?value;
         ..change_theme(value: isDark)..change_lang(value)..Dirctionlty(Dirctionlty!),
 
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+
+        },
         builder: (context, state) {
 
           return ScreenUtilInit(
@@ -61,7 +63,6 @@ String?value;
 
               theme: ThemeData(
                 scaffoldBackgroundColor: Colors.white,
-                colorScheme: ColorScheme(brightness: Brightness.light, primary: Colors.white, onPrimary: Colors.white, secondary: Colors.white, onSecondary: Colors.white, error: Colors.white, onError: Colors.white, background: Colors.white, onBackground: Colors.white, surface: Colors.white, onSurface: Colors.white),
                 textTheme: TextTheme(
                     bodyText1: TextStyle(
                       fontSize: 18.sp,
@@ -95,7 +96,6 @@ String?value;
               ),
               darkTheme: ThemeData(
                 scaffoldBackgroundColor: HexColor("333739"),
-                colorScheme: ColorScheme(brightness: Brightness.dark, primary: Colors.black, onPrimary: Colors.black, secondary: Colors.black, onSecondary: Colors.black, error: Colors.black, onError: Colors.black, background: Colors.black, onBackground: Colors.black, surface: Colors.black, onSurface: Colors.black),
 
                 textTheme: TextTheme(
                     bodyText1: TextStyle(

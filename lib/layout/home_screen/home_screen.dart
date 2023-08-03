@@ -33,7 +33,9 @@ List<Model>item=[
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {if(state is Change_Theme){
+        print("object");
+      }},
       builder: (context, state) {
         return Directionality(
            textDirection: TextDirection.ltr,
