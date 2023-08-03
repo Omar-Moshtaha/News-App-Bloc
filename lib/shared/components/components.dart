@@ -46,7 +46,9 @@ clipBehavior: Clip.antiAlias,
                   children: [
                     Text(
                       "${busines["title"]}",
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),

@@ -37,6 +37,7 @@ class Science_Fail extends AppStates {
 class Country extends AppStates {}
 
 class Change_Theme extends AppStates {}
+class ChangeTheme extends AppStates {}
 
 class Search_Load extends AppStates {}
 

@@ -58,10 +58,12 @@ String?value;
             designSize: Size(screenWidth, screenHeight),
             builder: (BuildContext context, Widget? child)=>MaterialApp(
               debugShowCheckedModeBanner: false,
+
               theme: ThemeData(
                 scaffoldBackgroundColor: Colors.white,
+                colorScheme: ColorScheme(brightness: Brightness.light, primary: Colors.white, onPrimary: Colors.white, secondary: Colors.white, onSecondary: Colors.white, error: Colors.white, onError: Colors.white, background: Colors.white, onBackground: Colors.white, surface: Colors.white, onSurface: Colors.white),
                 textTheme: TextTheme(
-                    bodyLarge: TextStyle(
+                    bodyText1: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
@@ -93,8 +95,10 @@ String?value;
               ),
               darkTheme: ThemeData(
                 scaffoldBackgroundColor: HexColor("333739"),
+                colorScheme: ColorScheme(brightness: Brightness.dark, primary: Colors.black, onPrimary: Colors.black, secondary: Colors.black, onSecondary: Colors.black, error: Colors.black, onError: Colors.black, background: Colors.black, onBackground: Colors.black, surface: Colors.black, onSurface: Colors.black),
+
                 textTheme: TextTheme(
-                    bodyLarge: TextStyle(
+                    bodyText1: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.white)),

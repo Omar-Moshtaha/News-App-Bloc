@@ -43,10 +43,7 @@ List<Model>item=[
               actions: [
                 IconButton(
                     onPressed: () {
-                      setState(() {
-                        AppCubit.get(context).change_theme();
-
-                      });
+                      AppCubit.get(context).change_theme();
                     },
                     icon: Icon(Icons.brightness_4_outlined,size: 20.h,)),
                 IconButton(onPressed: () {

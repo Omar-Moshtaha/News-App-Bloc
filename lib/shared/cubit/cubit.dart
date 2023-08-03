@@ -79,17 +79,12 @@ class AppCubit extends Cubit<AppStates> {
     if (value != null) {
       isDark = value;
       emit(Change_Theme());
-
     } else {
       isDark = !isDark;
       Cacth_Helper.putBoolean('isDark', isDark).then((value) {
-
+        emit(Change_Theme());
       });
-      emit(Change_Theme());
-
     }
-    emit(Change_Theme());
-
   }
   List<dynamic?> search = [];
   void get_search(String value) {
