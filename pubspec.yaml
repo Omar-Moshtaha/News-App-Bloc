@@ -33,18 +33,18 @@ dependencies:
   dio: ^4.0.0
 #  http: ^0.12.2
   animated_splash_screen: ^1.2.0
-  conditional_builder: ^1.0.2
   firebase_core:
   device_preview: ^1.1.0
 
   hexcolor: ^2.0.3
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.0
+  flutter_screenutil: ^5.8.4
+  cached_network_image: ^3.2.3
 
 
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.8.0
   flutter_test:
     sdk: flutter
 
