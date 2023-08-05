@@ -33,14 +33,14 @@ dependencies:
   dio: ^4.0.0
 #  http: ^0.12.2
   animated_splash_screen: ^1.2.0
-  firebase_core:
-  device_preview: ^1.1.0
+  firebase_core: ^2.15.0
 
   hexcolor: ^2.0.3
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.0
   flutter_screenutil: ^5.8.4
   cached_network_image: ^3.2.3
+  firebase_crashlytics: ^3.3.4
 
 
 

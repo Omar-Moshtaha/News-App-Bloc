@@ -11,9 +11,10 @@ class Science_Screen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return bulid_condtion(AppCubit
+        return Scaffold(body:
+        bulid_condtion(AppCubit
             .get(context)
-            .science, context, value: false);
+            .science, context, value: false),);
       }
     );
 

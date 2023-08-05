@@ -1,11 +1,13 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:news/firebase_options.dart';
 import 'package:news/layout/home_screen/home_screen.dart';
 import 'package:news/shared/cubit/cubit.dart';
 import 'package:news/shared/cubit/states.dart';
@@ -15,7 +17,18 @@ import 'dart:ui' as ui;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
   Dio_Helpers.inti();
   await Cacth_Helper.inti();
   bool? isDark = Cacth_Helper.getBoolean('isDark');
@@ -28,9 +41,7 @@ if(value==null){
   value='JP';
 }
  print(value);
-  runApp( DevicePreview(
-    builder: (context) => MyApp(isDark,value,Dirctionlty), // Wrap your app
-  ),);
+  runApp(MyApp(isDark,value,Dirctionlty));
 }
 class MyApp extends StatelessWidget {
   bool? isDark;

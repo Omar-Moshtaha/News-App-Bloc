@@ -11,7 +11,9 @@ class Business_Screen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-            return bulid_condtion(AppCubit.get(context).business, context, value: false);
+            return Scaffold(
+              body: bulid_condtion(AppCubit.get(context).business, context, value: false),
+            );
           },
         );
   }

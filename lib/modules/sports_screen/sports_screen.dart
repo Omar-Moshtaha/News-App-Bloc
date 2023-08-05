@@ -11,7 +11,9 @@ class Sports_Screen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-            return bulid_condtion(AppCubit.get(context).sports, context, value: false);
+        return Scaffold(
+          body: bulid_condtion(AppCubit.get(context).sports, context, value: false),
+        );
           }
     );
 

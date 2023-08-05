@@ -40,6 +40,7 @@ controller: searchController,
                 AppCubit.get(context).get_search(value);
                   },
               ),
+
 if(searchController.text.isEmpty)
   Align(alignment: Alignment.center,child: Center(child: Container(height: 50.w,width: 50.w,child: CircularProgressIndicator())),),
          if(searchController.text.isNotEmpty)
