@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:news/shared/app_cubit/home_cubit/home_cubit.dart';
+import 'package:news/shared/app_cubit/home_cubit/home_states.dart';
 
-import 'package:news/shared/cubit/cubit.dart';
-import 'package:news/shared/cubit/states.dart';
 import 'package:news/shared/network/local/cacth_helper.dart';
 class Model{
   int? id;
@@ -30,9 +31,15 @@ List<Model>item=[
     // TODO: implement initState
     super.initState();
   }
+  Future<void> handle()async{
+    HomeCubit.get(context).get_sports(Cacth_Helper.getLang('lang'));
+    HomeCubit.get(context).get_science(Cacth_Helper.getLang('lang'));
+    HomeCubit.get(context).get_business(Cacth_Helper.getLang('lang'));
+    return await Future.delayed(Duration(seconds:2 ));
+  }
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {if(state is Change_Theme){
         print("object");
       }},
@@ -45,7 +52,7 @@ List<Model>item=[
               actions: [
                 IconButton(
                     onPressed: () {
-                      AppCubit.get(context).change_theme();
+                      HomeCubit.get(context).change_theme();
                     },
                     icon: Icon(Icons.brightness_4_outlined,size: 20.h,)),
                 IconButton(onPressed: () {
@@ -66,7 +73,7 @@ backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
               ],
             ),
-            body: AppCubit.get(context).screen[AppCubit.get(context).index],
+            body: LiquidPullToRefresh (color: Colors.orange,onRefresh: handle,child: HomeCubit.get(context).screen[HomeCubit.get(context).index]),
             bottomNavigationBar: BottomNavigationBar(
               selectedLabelStyle: TextStyle(
                 fontSize: 15.sp,
@@ -76,11 +83,11 @@ backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                        unselectedLabelStyle: TextStyle(
               fontSize: 13.sp,
             ),
-              currentIndex: AppCubit.get(context).index,
+              currentIndex: HomeCubit.get(context).index,
               onTap: (value) {
-                AppCubit.get(context).bottom_index(value);
+                HomeCubit.get(context).bottom_index(value);
               },
-              items: AppCubit.get(context).bottom,
+              items: HomeCubit.get(context).bottom,
             ),
           ),
         );
@@ -99,38 +106,38 @@ children: [
 Spacer(),
 IconButton(padding: EdgeInsets.zero,color: Theme.of(context).textTheme.bodyText1?.color,onPressed: () {
   if(item.id==1){
-  AppCubit.get(context).get_business('us');
-  AppCubit.get(context).get_sports('us');
-  AppCubit.get(context).get_science('us');
+  HomeCubit.get(context).get_business('us');
+  HomeCubit.get(context).get_sports('us');
+  HomeCubit.get(context).get_science('us');
   Cacth_Helper.putLang('lang', 'us');
-  var i=AppCubit.get(context).isDirctionlty=true;
+  var i=HomeCubit.get(context).isDirctionlty=true;
   Cacth_Helper.put_Dirctionlty('Dirctionlty', i);
   Navigator.pop(context);
 
   }else if(item.id==2){
-  AppCubit.get(context).get_business('IN');
-  AppCubit.get(context).get_sports('IN');
-  AppCubit.get(context).get_science('IN');
+  HomeCubit.get(context).get_business('IN');
+  HomeCubit.get(context).get_sports('IN');
+  HomeCubit.get(context).get_science('IN');
   Cacth_Helper.putLang('lang', 'IN');
-  var i=AppCubit.get(context).isDirctionlty=true;
+  var i=HomeCubit.get(context).isDirctionlty=true;
   Cacth_Helper.put_Dirctionlty('Dirctionlty', i);
   Navigator.pop(context);
 
   }else if(item.id==3){
-  AppCubit.get(context).get_business('JP');
-  AppCubit.get(context).get_sports('JP');
-  AppCubit.get(context).get_science('JP');
+  HomeCubit.get(context).get_business('JP');
+  HomeCubit.get(context).get_sports('JP');
+  HomeCubit.get(context).get_science('JP');
   Cacth_Helper.putLang('lang', 'JP');
-  var i=AppCubit.get(context).isDirctionlty=true;
+  var i=HomeCubit.get(context).isDirctionlty=true;
   Cacth_Helper.put_Dirctionlty('Dirctionlty', i);
   Navigator.pop(context);
 
   }else if(item.id==4){
-    AppCubit.get(context).get_business('KR');
-    AppCubit.get(context).get_sports('KR');
-    AppCubit.get(context).get_science('KR');
+    HomeCubit.get(context).get_business('KR');
+    HomeCubit.get(context).get_sports('KR');
+    HomeCubit.get(context).get_science('KR');
     Cacth_Helper.putLang('lang', 'KR');
-    var i=AppCubit.get(context).isDirctionlty=true;
+    var i=HomeCubit.get(context).isDirctionlty=true;
     Cacth_Helper.put_Dirctionlty('Dirctionlty', i);
     Navigator.pop(context);
 

@@ -31,10 +31,9 @@ dependencies:
   flutter_bloc: ^8.0.1
   bloc: ^8.0.2
   dio: ^4.0.0
-#  http: ^0.12.2
   animated_splash_screen: ^1.2.0
   firebase_core: ^2.15.0
-
+  liquid_pull_to_refresh: ^3.0.1
   hexcolor: ^2.0.3
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.0

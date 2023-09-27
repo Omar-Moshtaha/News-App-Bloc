@@ -9,11 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:news/firebase_options.dart';
 import 'package:news/layout/home_screen/home_screen.dart';
-import 'package:news/shared/cubit/cubit.dart';
-import 'package:news/shared/cubit/states.dart';
+import 'package:news/shared/app_cubit/home_cubit/home_cubit.dart';
+import 'package:news/shared/app_cubit/home_cubit/home_states.dart';
 import 'package:news/shared/network/local/cacth_helper.dart';
 import 'package:news/shared/network/remote/dio_helper.dart';
 import 'dart:ui' as ui;
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,11 @@ void main() async {
   };
   Dio_Helpers.inti();
   await Cacth_Helper.inti();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   bool? isDark = Cacth_Helper.getBoolean('isDark');
  String? value=Cacth_Helper.getLang('lang');
  bool?Dirctionlty=Cacth_Helper.get_Dirctionlty('Dirctionlty');
@@ -55,13 +62,13 @@ String?value;
     double  screenWidth = windowSize.width / screenScale;
     double screenHeight = windowSize.height / screenScale;
     return BlocProvider(
-      create: (context) => AppCubit()
+      create: (context) => HomeCubit()
         ..get_business(value)
         ..get_sports(value)
         ..get_science(value)
         ..change_theme(value: isDark)..change_lang(value)..Dirctionlty(Dirctionlty!),
 
-      child: BlocConsumer<AppCubit, AppStates>(
+      child: BlocConsumer<HomeCubit, HomeStates>(
         listener: (context, state) {
 
         },
@@ -137,7 +144,7 @@ String?value;
                 ),
               ),
               themeMode:
-              AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+              HomeCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
               home:
               AnimatedSplashScreen(splashIconSize: double.infinity,splash:
               Column(

@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/shared/app_cubit/home_cubit/home_cubit.dart';
+import 'package:news/shared/app_cubit/home_cubit/home_states.dart';
 import 'package:news/shared/components/components.dart';
-import 'package:news/shared/cubit/cubit.dart';
-import 'package:news/shared/cubit/states.dart';
+
+
 
 class Search_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var  searchController=TextEditingController();
-    return BlocConsumer<AppCubit,AppStates>(
+    return BlocConsumer<HomeCubit,HomeStates>(
       listener: (context, state) {
 
       },
@@ -37,7 +39,7 @@ controller: searchController,
                   prefixIcon: Icon(Icons.search,size: 20.h,),
                 ),
                 onChanged: (value) {
-                AppCubit.get(context).get_search(value);
+                HomeCubit.get(context).get_search(value);
                   },
               ),
 
@@ -46,7 +48,7 @@ if(searchController.text.isEmpty)
          if(searchController.text.isNotEmpty)
            Padding(
                 padding:  EdgeInsets.only(top: 70.h),
-                child: bulid_condtion(AppCubit.get(context).search,context,value: true),
+                child: bulid_condtion(HomeCubit.get(context).search,context,value: true),
               ),
 
             ],
