@@ -6,9 +6,9 @@ import 'package:news/modules/news_details_screen/news_details_screen.dart';
 import 'package:news/modules/web_veiw/web_veiw.dart';
 import 'package:news/shared/app_cubit/home_cubit/home_cubit.dart';
 
-Widget build_item(busines, context) => GestureDetector(
+Widget build_item(model, context) => GestureDetector(
   onTap: (){
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>NewsDetailsScreen(busines["urlToImage"],busines["title"],busines['description'])), (route) => false);
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>NewsDetailsScreen(model["urlToImage"],model["title"],model['description'])), (route) => false);
   },
   child:   Padding(
 
@@ -28,7 +28,7 @@ Widget build_item(busines, context) => GestureDetector(
 
                     MaterialPageRoute(
 
-                      builder: (context) => Web_Veiw(busines["url"]),
+                      builder: (context) => Web_Veiw(model["url"]),
 
                     ));
 
@@ -44,7 +44,7 @@ Widget build_item(busines, context) => GestureDetector(
 
                 child: CachedNetworkImage(
 
-                  imageUrl: "${busines["urlToImage"]}",
+                  imageUrl: "${model["urlToImage"]}",
 
                   fit: BoxFit.cover,
 
@@ -92,7 +92,7 @@ Widget build_item(busines, context) => GestureDetector(
 
                       Text(
 
-                        "${busines["title"]}",
+                        "${model["title"]}",
 
                         style: Theme.of(context).textTheme.bodyText1?.copyWith(
 
@@ -110,7 +110,7 @@ Widget build_item(busines, context) => GestureDetector(
 
                       Text(
 
-                        "${busines["publishedAt"].toString().substring(0,10)}",
+                        "${model["publishedAt"].toString().substring(0,10)}",
 
                         style: TextStyle(
 
@@ -138,13 +138,16 @@ Widget build_item(busines, context) => GestureDetector(
 
       ),
 );
-Widget bulid_condtion(List<dynamic>task,context,{required bool value}){
+Widget bulid_condtion( list,context,{required bool value}){
 
-  if(task.length>0){
-   return ListView.builder(physics: BouncingScrollPhysics(),itemBuilder: (context, index) => build_item(task[index], context),itemCount: task.length,);
+  if(list.length>0){
+
+   return ListView.builder(physics: BouncingScrollPhysics(),itemBuilder: (context, index) => build_item(list[index], context),itemCount: list.length,);
 
   }else{
   return value? Container():Center(child: CircularProgressIndicator());
+
+
   }
 }
 

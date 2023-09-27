@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/shared/app_cubit/home_cubit/home_cubit.dart';
 import 'package:news/shared/app_cubit/home_cubit/home_states.dart';
 import 'package:news/shared/components/components.dart';
+import 'package:news/shared/components/constant.dart';
 
 
 
@@ -14,7 +15,7 @@ class Sports_Screen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: bulid_condtion(HomeCubit.get(context).sports, context, value: false),
+          body: bulid_condtion(checkWifi==true?HomeCubit.get(context).sports:HomeCubit.get(context).sport_news, context, value: false),
         );
           }
     );

@@ -7,6 +7,11 @@ class BottomIndex extends HomeStates {}
 class Business_Load extends HomeStates {}
 
 class Business_Succeeded extends HomeStates {}
+class CreatDb extends HomeStates{}
+class InsertToDb extends HomeStates{}
+class GetFormDb extends HomeStates{}
+class LoadData extends HomeStates{}
+class DeleteElement extends HomeStates{}
 
 class Business_Fail extends HomeStates {
   final String error;

@@ -15,6 +15,8 @@ import 'package:news/shared/network/local/cacth_helper.dart';
 import 'package:news/shared/network/remote/dio_helper.dart';
 import 'dart:ui' as ui;
 
+import 'shared/components/components.dart';
+
 
 
 void main() async {
@@ -46,6 +48,7 @@ void main() async {
  }
 if(value==null){
   value='JP';
+  Cacth_Helper.putLang('lang','JP');
 }
  print(value);
   runApp(MyApp(isDark,value,Dirctionlty));
@@ -55,8 +58,11 @@ class MyApp extends StatelessWidget {
 String?value;
   bool? Dirctionlty;
   MyApp(this.isDark,this.value,this.Dirctionlty);
+
   @override
+
   Widget build(BuildContext context) {
+
     final windowSize = ui.window.physicalSize;
     final screenScale = ui.window.devicePixelRatio;
     double  screenWidth = windowSize.width / screenScale;
@@ -66,6 +72,8 @@ String?value;
         ..get_business(value)
         ..get_sports(value)
         ..get_science(value)
+        ..creatDd()
+
         ..change_theme(value: isDark)..change_lang(value)..Dirctionlty(Dirctionlty!),
 
       child: BlocConsumer<HomeCubit, HomeStates>(

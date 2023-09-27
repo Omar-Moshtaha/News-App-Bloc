@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class Dio_Helpers {
   static Dio? dio;
 
-  static inti() {
+  static void inti() {
     dio = Dio(
       BaseOptions(
           baseUrl: "https://newsapi.org/", receiveDataWhenStatusError: true),
@@ -11,8 +11,13 @@ class Dio_Helpers {
   }
 
   static Future<Response?> getdata(
-      {required String mothed, Map<String, dynamic>? qeruy}) async {
-    return await dio?.get(mothed, queryParameters: qeruy);
+      {required String method, Map<String, dynamic>? query}) async {
+    try {
+      return await dio?.get(method, queryParameters: query);
+    } catch (e) {
+      // Handle errors here (e.g., network errors)
+      print("Error: $e");
+      return null;
+    }
   }
-// void get()
 }

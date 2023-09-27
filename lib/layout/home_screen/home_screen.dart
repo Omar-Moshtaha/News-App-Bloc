@@ -1,17 +1,18 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
+import 'package:news/model/flags_model.dart';
 import 'package:news/shared/app_cubit/home_cubit/home_cubit.dart';
 import 'package:news/shared/app_cubit/home_cubit/home_states.dart';
+import 'package:news/shared/components/constant.dart';
 
 import 'package:news/shared/network/local/cacth_helper.dart';
-class Model{
-  int? id;
-  String?Text;
-  String?image;
-  Model(this.id,this.Text,this.image);
-}
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,23 +20,56 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-List<Model>item=[
- Model(1,"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/240px-Flag_of_the_United_States.svg.png","United State"),
-  Model(2,"https://cdn.britannica.com/97/1597-050-008F30FA/Flag-India.jpg","India"),
-  Model(3,"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/280px-Flag_of_Japan.svg.png","japan"),
-  Model(4,"https://cdn.britannica.com/49/1949-050-39ED83BA/Flag-South-Korea.jpg","South Korea"),
-
-];
-@override
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    initConnectivity();
+
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
-  Future<void> handle()async{
-    HomeCubit.get(context).get_sports(Cacth_Helper.getLang('lang'));
-    HomeCubit.get(context).get_science(Cacth_Helper.getLang('lang'));
-    HomeCubit.get(context).get_business(Cacth_Helper.getLang('lang'));
-    return await Future.delayed(Duration(seconds:2 ));
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      _connectionStatus = result;
+      if(_connectionStatus.toString()=="ConnectivityResult.wifi"){
+        checkWifi=true;
+        print("$checkWifi");
+      }
+      if(_connectionStatus.toString()=="ConnectivityResult.none"){
+        checkWifi=false;
+        print("$checkWifi");
+      }
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -61,10 +95,10 @@ backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                  content:Container(
                    width: 500.w,
                     height: 200.h,
-                   child:Container(height: 200.h,child: ListView.separated( physics: BouncingScrollPhysics(),itemBuilder: (context, index) =>bulid_item(item[index],context) , separatorBuilder: (context, index) =>Padding(
+                   child:Container(height: 200.h,child: ListView.separated( physics: BouncingScrollPhysics(),itemBuilder: (context, index) =>bulid_item(HomeCubit.get(context).flags[index],context) , separatorBuilder: (context, index) =>Padding(
                      padding:  EdgeInsets.only(top: 10.h,bottom: 10.h),
                      child: Container(color: Colors.grey,width: double.infinity,height: 1.h),
-                   ) , itemCount: item.length))
+                   ) , itemCount: HomeCubit.get(context).flags.length))
                  )
 
                );
@@ -73,7 +107,7 @@ backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
               ],
             ),
-            body: LiquidPullToRefresh (color: Colors.orange,onRefresh: handle,child: HomeCubit.get(context).screen[HomeCubit.get(context).index]),
+            body: LiquidPullToRefresh (color: Colors.orange,onRefresh: HomeCubit.get(context).handleRefresh,child: HomeCubit.get(context).screen[HomeCubit.get(context).index]),
             bottomNavigationBar: BottomNavigationBar(
               selectedLabelStyle: TextStyle(
                 fontSize: 15.sp,
@@ -95,7 +129,7 @@ backgroundColor: Theme.of(context).scaffoldBackgroundColor,
     );
   }
 
-  Widget bulid_item([Model? item,context])=>Row(
+  Widget bulid_item([FlagsModel? item,context])=>Row(
 children: [
   Container(
       width: 30.w,
